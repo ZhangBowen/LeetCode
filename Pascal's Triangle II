@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> res;
+        for(int i=0;i<=rowIndex;i++){
+            res.push_back(get_C(rowIndex,i));
+        }
+        return res;
+    }
+    int get_C(int n,int m){
+        long long res = 1;
+        for(int i = 1;i<=m;i++){
+            res *= n-i+1;
+            res /=i;
+        }
+        return (int)res;
+    }
+};
