@@ -1,0 +1,48 @@
+class MinStack {
+public:
+    int * data;
+    int size;
+    int max_size;
+    int * min_data;
+    int min_size;
+    int min_max_size;
+    MinStack(){
+        data = (int *)malloc(sizeof(int));
+        size = 0;
+        max_size = 1;
+        
+        min_data = (int *)malloc(sizeof(int));
+        min_size = 0;
+        min_max_size = 1;
+    }
+    void push(int x) {
+        if(size == max_size){
+            max_size <<=2;
+            data = (int *)realloc(data,sizeof(int) * max_size);
+        }
+        data[size++] = x;
+        
+        if(min_size == 0 || x<=min_data[min_size-1]){
+            if(min_size == min_max_size){
+                min_max_size <<=2;
+                min_data = (int *) realloc(min_data,sizeof(int) * min_max_size);
+            }
+            min_data[min_size++]=x;
+        }
+    }
+
+    void pop() {
+        size--;
+        if(data[size] == min_data[min_size -1]){
+            min_size--;
+        }
+    }
+
+    int top() {
+        return data[size-1];
+    }
+
+    int getMin() {
+        return min_data[min_size-1];
+    }
+};
